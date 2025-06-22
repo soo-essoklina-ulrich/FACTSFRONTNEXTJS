@@ -2,9 +2,6 @@
 
 import * as React from 'react';
 
-import { NavDocuments } from '@/components/nav-documents';
-import { NavMain } from '@/components/nav-main';
-import { NavSecondary } from '@/components/nav-secondary';
 import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
@@ -17,8 +14,10 @@ import {
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useSession } from 'next-auth/react';
-
-// import { data } from '@/lib/sidebarItem';
+import menuParGroups from '@/lib/sidebarItem';
+import { IconCirclePlusFilled, IconMail } from '@tabler/icons-react';
+import { Button } from '@/components/ui/button';
+import MenuGenerator from '@/components/share/MenuGenerator';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = useSession();
@@ -41,9 +40,29 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {/*<NavMain items={data.navMain} />*/}
-        {/*<NavDocuments items={data.documents} />*/}
-        {/*<NavSecondary items={data.navSecondary} className="mt-auto" />*/}
+        <SidebarMenu>
+          <SidebarMenuItem className="flex items-center gap-2">
+            <SidebarMenuButton
+              tooltip="Quick Create"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+            >
+              <IconCirclePlusFilled />
+              <span>Quick Create</span>
+            </SidebarMenuButton>
+            <Button
+              size="icon"
+              className="size-8 group-data-[collapsible=icon]:opacity-0"
+              variant="outline"
+            >
+              <IconMail />
+              <span className="sr-only">Inbox</span>
+            </Button>
+          </SidebarMenuItem>
+        </SidebarMenu>
+
+        {menuParGroups.map((item, index) => (
+          <MenuGenerator key={index} items={item.menu} groupLabel={item.name} />
+        ))}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={session?.user} />

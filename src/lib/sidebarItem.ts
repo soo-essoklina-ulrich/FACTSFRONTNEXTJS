@@ -1,5 +1,16 @@
 // Type pour les icônes (supposant que vous utilisez des composants React)
 import { ChildrenType } from '@/types/types';
+import {
+  BriefcaseBusiness,
+  FileBox,
+  FileUser,
+  GalleryHorizontalEnd,
+  LayoutDashboard,
+  Regex,
+  Tag,
+  UsersRound,
+} from 'lucide-react';
+import { IconUsersGroup } from '@tabler/icons-react';
 
 type IconComponent = React.ComponentType<any>;
 
@@ -24,7 +35,77 @@ type TypeNave = {
   };
 } & { nav?: 'main' | 'secondary'; group?: boolean } & NavItemWithSub;
 
-type NavigationItem = TypeNave;
+type Menytable = {
+  name: string;
+  menu: TypeNave[];
+};
 
-// @ts-ignore
-export const menu: NavigationItem = {};
+const menuParGroups: Menytable[] = [
+  {
+    name: 'dashboard',
+    menu: [
+      {
+        title: 'Tableau de Bord',
+        url: '/home',
+        icon: LayoutDashboard,
+      },
+    ] as TypeNave[],
+  },
+  {
+    name: 'Utilisateur',
+    menu: [
+      {
+        title: 'Utilisateur',
+        url: '/user',
+        icon: UsersRound,
+      },
+    ] as TypeNave[],
+  },
+  {
+    name: 'PROJET-CLIENT',
+    menu: [
+      {
+        title: 'Projet',
+        url: '/projet',
+        icon: BriefcaseBusiness,
+      },
+      {
+        title: 'Client',
+        url: '/client',
+        icon: Regex,
+      },
+    ] as TypeNave[],
+  },
+  {
+    name: 'DOSSIER',
+    menu: [
+      {
+        title: 'Proforma',
+        url: '/documents/proforma',
+        icon: FileBox,
+      },
+      {
+        title: 'Borderau',
+        url: '/documents/bordeau',
+        icon: GalleryHorizontalEnd,
+      },
+      {
+        title: 'Facture',
+        url: '/documents/facture',
+        icon: FileUser,
+      },
+    ] as TypeNave[],
+  },
+  {
+    name: 'Gestion Article',
+    menu: [
+      {
+        title: 'Article',
+        url: '/article',
+        icon: Tag,
+      },
+    ] as TypeNave[],
+  },
+];
+
+export default menuParGroups;
