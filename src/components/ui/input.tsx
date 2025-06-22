@@ -1,6 +1,12 @@
 import * as React from 'react';
-
+import { Eye, EyeOff, Lock, LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+type InputWithIconProps = {
+  icon: LucideIcon;
+  iconPosition?: 'left' | 'right';
+  className?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   return (
@@ -18,4 +24,50 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   );
 }
 
-export { Input };
+const InputWithIcon = ({
+  icon: Icon,
+  iconPosition = 'left',
+  className,
+  ...props
+}: InputWithIconProps) => {
+  return (
+    <div className="relative w-full">
+      {iconPosition === 'left' && (
+        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground">
+          <Icon className="h-4 w-4" />
+        </span>
+      )}
+
+      <Input {...props} className={cn(iconPosition === 'left' ? 'pl-9' : 'pr-9', className)} />
+
+      {iconPosition === 'right' && (
+        <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground">
+          <Icon className="h-4 w-4" />
+        </span>
+      )}
+    </div>
+  );
+};
+
+const PasswordInput = ({ className = '', ...props }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  return (
+    <div className="relative">
+      <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        type={showPassword ? 'text' : 'password'}
+        className={`pl-10 pr-10 ${className}`}
+        {...props}
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+      >
+        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+      </button>
+    </div>
+  );
+};
+export { Input, InputWithIcon, PasswordInput };
