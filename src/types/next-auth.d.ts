@@ -2,7 +2,7 @@
 import NextAuth, { DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
-  interface Session {
+  type Session = {
     bearer?: string;
     refresh?: string;
     error?: string;
@@ -15,5 +15,5 @@ declare module 'next-auth' {
       numero?: string;
       role?: string;
     };
-  }
+  };
 }
