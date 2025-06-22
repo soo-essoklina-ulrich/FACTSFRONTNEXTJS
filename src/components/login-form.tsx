@@ -20,10 +20,12 @@ import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { signIn } from 'next-auth/react';
 import { Progress } from '@/components/ui/progress';
+import {useRouter} from "next/navigation";
 
 type formData = z.infer<typeof schemaLogin>;
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<formData>({
     resolver: zodResolver(schemaLogin),
@@ -33,13 +35,13 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
     },
   });
 
-  const SubmitForm = (data: formData) => {
+  const SubmitForm = async (data: formData) => {
     setIsSubmitting(true);
 
-    const res = signIn('credentials', { ...data });
+    const res = await signIn('credentials', { ...data, redirect:false });
 
-    if (res) {
-      console.log(res);
+    if (res?.ok) {
+      router.push('/home')
     }
     setTimeout(() => {
       setIsSubmitting(false);

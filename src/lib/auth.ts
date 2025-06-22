@@ -35,9 +35,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: '/login',
+    signOut:'/'
+  },
   callbacks: {
     async jwt({ token, user, account }) {
-      console.log(token, user);
+      console.log(token, user,account);
       if (account && user) {
         return {
           ...token,
@@ -51,7 +55,7 @@ export const authOptions: NextAuthOptions = {
 
         if (decoded && decoded.exp && decoded.exp - currentTime < 300) {
           const refresh = await AuthService.refreshToken(
-            typeof token?.refresh === 'string' ? token.refresh : ''
+              typeof token?.refresh === 'string' ? token.refresh : ''
           );
           if (refresh) {
             const newInfo = JwtUtils.decode(refresh.bearer);
@@ -93,9 +97,6 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
-  },
-  pages: {
-    signIn: 'login',
   },
   session: {
     strategy: 'jwt',

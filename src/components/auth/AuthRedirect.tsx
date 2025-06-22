@@ -7,7 +7,7 @@ const AuthRedirect = async () => {
   const login = 'login';
   const home = 'home';
   const redirectpath = `/login?redirectTo=${pathname}`;
-  return redirect(pathname === login ? login : pathname === home ? login : redirectpath);
+  return redirect(login);
 };
 
 export default AuthRedirect;
