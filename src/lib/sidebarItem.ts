@@ -56,7 +56,7 @@ const menuParGroups: Menytable[] = [
       },
       {
         title: 'Borderau',
-        url: '/documents/bordeau',
+        url: '/documents/borderau',
         icon: GalleryHorizontalEnd,
       },
       {
