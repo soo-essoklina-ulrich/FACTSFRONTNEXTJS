@@ -37,12 +37,11 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: '/login',
-    signOut:'/login',
-    error:'/login'
+    signOut: '/login',
+    error: '/login',
   },
   callbacks: {
     async jwt({ token, user, account }) {
-
       if (account && user) {
         return {
           ...token,
@@ -56,7 +55,7 @@ export const authOptions: NextAuthOptions = {
 
         if (decoded && decoded.exp && decoded.exp - currentTime < 300) {
           const refresh = await AuthService.refreshToken(
-              typeof token?.refresh === 'string' ? token.refresh : ''
+            typeof token?.refresh === 'string' ? token.refresh : ''
           );
           if (refresh) {
             const newInfo = JwtUtils.decode(refresh.bearer);

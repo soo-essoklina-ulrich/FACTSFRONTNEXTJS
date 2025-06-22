@@ -10,7 +10,7 @@ const AxiosInstance = axios.create({
   timeout: 10000,
 });
 
-InterceptorAxios(AxiosInstance)
+InterceptorAxios(AxiosInstance);
 InterceptorRemoveParamsNull(AxiosInstance);
 InterceptorErrorHandler(AxiosInstance);
 
