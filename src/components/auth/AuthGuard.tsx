@@ -5,7 +5,7 @@ import AuthRedirect from '@/components/auth/AuthRedirect';
 
 const AuthGuard = async ({ children }: ChildrenType) => {
   const session = await getServerSession();
-  console.log('session', session);
+
   return <>{session ? children : <AuthRedirect />}</>;
 };
 

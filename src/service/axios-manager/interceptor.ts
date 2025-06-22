@@ -1,4 +1,24 @@
 import {AxiosError, AxiosInstance} from 'axios';
+import {getSession} from "next-auth/react";
+
+export const InterceptorAxios = (instance: AxiosInstance) => {
+    instance.interceptors.request.use(
+        async config => {
+            const session = await getSession()
+
+            if (session) {
+                config.headers.Authorization = `Bearer ${session.bearer}`
+            }
+            return config
+        },
+        error => {
+            console.log('error', error)
+
+            return Promise.reject(error)
+        }
+    )
+}
+
 
 export const InterceptorErrorHandler = (instance: AxiosInstance) => {
     instance.interceptors.response.use(

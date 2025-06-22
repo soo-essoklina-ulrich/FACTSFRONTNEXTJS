@@ -37,11 +37,12 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: '/login',
-    signOut:'/'
+    signOut:'/login',
+    error:'/login'
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      console.log(token, user,account);
+
       if (account && user) {
         return {
           ...token,
@@ -94,13 +95,14 @@ export const authOptions: NextAuthOptions = {
       if (token.error) {
         session.error = typeof token.error === 'string' ? token.error : undefined;
       }
-
       return session;
     },
   },
+
   session: {
     strategy: 'jwt',
     maxAge: 24 * 60 * 60, //1jrs
   },
   secret: process.env.NEXTAUTH_SECRET || 'YFYFWN/YxRuyeai2+gRl',
+  debug: process.env.NODE_ENV === 'development',
 };

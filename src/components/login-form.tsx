@@ -13,13 +13,14 @@ import {useState} from 'react';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {signIn} from 'next-auth/react';
 import {Progress} from '@/components/ui/progress';
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {toast} from 'sonner';
 
 type formData = z.infer<typeof schemaLogin>;
 
 export function LoginForm({className, ...props}: React.ComponentProps<'div'>) {
     const router = useRouter();
+    const searchParams = useSearchParams()
     const [isSubmitting, setIsSubmitting] = useState(false);
     const form = useForm<formData>({
         resolver: zodResolver(schemaLogin),
@@ -35,7 +36,10 @@ export function LoginForm({className, ...props}: React.ComponentProps<'div'>) {
         const res = await signIn('credentials', {...data, redirect: false});
 
         if (res && res.ok && res.error === null) {
-            router.push('/home')
+            const redirectURL = searchParams.get('redirectTo') ?? '/'
+
+            router.replace(redirectURL)
+            // router.push('/home')
         } else {
             console.log('error', res?.error)
             toast.error('Identifiant Invalide')

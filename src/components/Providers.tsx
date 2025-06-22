@@ -1,5 +1,5 @@
 import QueryProvider from '@/components/queryclient/QueryProvider';
-import {NextAuthProvider} from '@/context/nextAuthProvider';
+import NextAuthProvider from "@/context/nextAuthProvider";
 import {ChildrenType} from '@/types/types';
 
 const Providers = async ({children}: ChildrenType) => {
