@@ -1,5 +1,4 @@
-// Type pour les icônes (supposant que vous utilisez des composants React)
-import { ChildrenType } from '@/types/types';
+import type { Menytable, TypeNave } from '@/types/menu/NavigationType';
 import {
   BriefcaseBusiness,
   FileBox,
@@ -10,35 +9,6 @@ import {
   Tag,
   UsersRound,
 } from 'lucide-react';
-import { IconUsersGroup } from '@tabler/icons-react';
-
-type IconComponent = React.ComponentType<any>;
-
-// Type pour un élément de navigation simple
-type NavItem = {
-  title: string;
-  url: string;
-  icon?: IconComponent;
-};
-
-// Type pour un élément de navigation avec sous-éléments
-type NavItemWithSub = NavItem & {
-  isActive?: boolean;
-  items?: Omit<NavItem, 'icon'>[];
-};
-
-type TypeNave = {
-  special?: {
-    tooltip: string;
-    className?: React.CSSProperties;
-    icon?: IconComponent;
-  };
-} & { nav?: 'main' | 'secondary'; group?: boolean } & NavItemWithSub;
-
-type Menytable = {
-  name: string;
-  menu: TypeNave[];
-};
 
 const menuParGroups: Menytable[] = [
   {
