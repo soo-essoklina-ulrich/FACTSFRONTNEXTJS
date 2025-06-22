@@ -12,10 +12,15 @@ export class BorderauService {
     return (await AxiosInstance.post<BorderauType>(`${url}/${id_proforma}`, {})).data;
   }
   async getAll(params?: ParamRequests) {
-    return (await AxiosInstance.get<CustomresponseType<BorderauType>>(`${url}`)).data;
+    return (await AxiosInstance.get<CustomresponseType<BorderauType>>(`${url}`, { params: params }))
+      .data;
   }
   async getAllWhoNoUseTocreateFacture(params?: ParamRequests) {
-    return (await AxiosInstance.get<CustomresponseType<BorderauType>>(`${url}/not-use`)).data;
+    return (
+      await AxiosInstance.get<CustomresponseType<BorderauType>>(`${url}/not-use`, {
+        params: params,
+      })
+    ).data;
   }
   async Updatedata(id: string, data: any) {
     throw new Error('Method not implemented.');
