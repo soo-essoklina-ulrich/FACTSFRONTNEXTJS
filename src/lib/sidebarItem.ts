@@ -1,4 +1,4 @@
-import type { Menytable, TypeNave } from '@/types/menu/NavigationType';
+import type { Menytable, TypeNave } from '@/types/menu/navigation.type';
 import {
   BriefcaseBusiness,
   FileBox,

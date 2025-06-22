@@ -18,4 +18,8 @@ export class AuthService {
       })
     ).data;
   }
+
+  static async logout() {
+    return (await AxiosInstance.post('auth/logout', {})).data;
+  }
 }

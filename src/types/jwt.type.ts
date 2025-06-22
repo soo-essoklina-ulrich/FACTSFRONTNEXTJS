@@ -1,4 +1,4 @@
-export type JWTType = {
+export type JwtType = {
   iat: number;
   exp: number;
   sub: string;

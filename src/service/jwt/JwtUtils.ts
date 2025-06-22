@@ -1,9 +1,9 @@
 import { jwtDecode } from 'jwt-decode';
-import { JWTType } from '@/types/JwtType';
+import { JwtType } from '@/types/jwt.type';
 
 export class JwtUtils {
   static decode = (token: string) => {
-    return jwtDecode<JWTType>(token);
+    return jwtDecode<JwtType>(token);
   };
 
   static getexpirationdate = (token: string): Date | null => {
