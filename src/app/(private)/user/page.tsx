@@ -1,5 +1,7 @@
+import UserPage from '@/views/user';
+
 const Page = () => {
-  return <></>;
+  return <UserPage />;
 };
 
 export default Page;
